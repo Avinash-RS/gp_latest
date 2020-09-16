@@ -1,0 +1,40 @@
+div {
+  width: 100vw;
+  height: 100vh;
+  background: #23a39b;
+  display: flexbox;
+  justify-content: center;
+  .contents {
+    position: absolute;
+    font-size: 30px;
+    font-weight: 200;
+    color: #fff;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .contents1 {
+    position: absolute;
+    font-size: 30px;
+    font-weight: 200;
+    color: #fff;
+    top: 60%;
+    left: 51%;
+    transform: translate(-60%, -50%);
+  }
+}
+// @media screen and (min-width: 480px) {
+//     div {
+//         background-color: skyblue;
+//         width: 100vw;
+//         height: 100vh;
+//         border: groove black;
+//     }
+
+//     div#main {
+//         font-size: 3vw;
+//     }
+// }
+.small-text {
+    font-size: 16px;
+}

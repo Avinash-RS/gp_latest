@@ -1,0 +1,9 @@
+<div class="layout">
+        <app-gp-sidebar *ngIf="selectedProduct1 && productList1" [selectedProduct1]="selectedProduct1"></app-gp-sidebar>
+        <main>
+                <app-gp-email-verfier *ngIf="showDialog===true"></app-gp-email-verfier>
+                <app-gp-header *ngIf="productList1" [productList1]="productList1" [selectedProduct]="selectedProduct"></app-gp-header>
+                <router-outlet *ngIf="productList1"></router-outlet>
+                <footer class="footer">Growth Portal - A product of Wekan - V{{version}}</footer>
+        </main>
+</div>

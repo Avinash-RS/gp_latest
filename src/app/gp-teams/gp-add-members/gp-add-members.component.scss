@@ -1,0 +1,59 @@
+.add-member-wrapper {
+  margin: 0 !important;
+  border-radius: 4px;
+  .heading {
+    color: #3b3c3b;
+    font-weight: 200;
+    font-size: 18px;
+    text-align: center;
+    margin: 12px 0 0 0;
+  }
+  .login-form {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 !important;
+    padding: 30px 0px 0px 10px !important;
+    .mat-form-field {
+      //    padding-bottom: 1.34375em;
+      min-width: 240px !important;
+      min-height: 48px !important;
+      max-width: 300px !important;
+      max-height: 100% !important;
+      padding: 0 22px 0px 0px;
+      margin: 0 !important;
+    }
+  }
+  .submit-btn {
+    display: block;
+    text-align: center;
+    position: relative;
+    .update-btn {
+        width: 120px;
+        height: 35px;
+        margin: 0 0 0 10px !important;
+        border: 1px solid #23A39B;
+        border-radius: 4px;
+        background: #23A39B 0% 0% no-repeat padding-box;
+        color: #fff;
+        font-weight: 200;
+        font-size: 12px;
+    }
+    .cancel-btn {
+        width: 120px;
+        height: 35px;
+        border: 1px solid #23A39B;
+        border-radius: 4px;
+        color: #23A39B;
+        background: #55A29B20 0% 0% no-repeat padding-box;
+        font-weight: 200;
+        font-size: 12px;
+    }
+  }
+}
+.spinner {
+  display: block;
+  position: fixed;
+  z-index: 103;
+  top: 50%;
+  right: 50%; /* or: left: 50%; */
+}

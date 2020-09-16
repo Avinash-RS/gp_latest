@@ -1,0 +1,51 @@
+<!-- {{loginForm.value | json}} -->
+<!-- <router-outlet></router-outlet> -->
+<div class="login-wrapper">
+        <!-- <div class="logo">
+            <img src="../../assets/Group 7.svg" alt="">
+        </div> -->
+        <div class="bg">
+            <div class="one">
+                <div class="logo">
+                    <img class="logo-img" src="../../assets/logo-updated.svg" alt="logo">
+                    <div></div>
+                </div>
+                <img class="flag-signup" src="../../assets/flame-sign-up.png" alt="sign up">
+            </div>
+            <div class="two"></div>
+        </div>
+        <div class="login">
+<form class="login-form" (ngSubmit)="Login()" [formGroup]="loginForm" style="margin: 2em;">
+    <div class="login-text">
+        <h2>Login</h2>
+    </div>
+    <div class="form-group">
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="userEmail" placeholder="Email">
+        </mat-form-field>
+        <div style="align-content: left; text-align: left; margin-top: -15px;"
+            *ngIf="userEmail.invalid && userEmail.touched">
+            <small *ngIf="userEmail.errors?.required" class="text-danger">Email is required</small>
+            <small *ngIf="userEmail.errors?.pattern" class="text-danger">Please enter a valid email</small>
+        </div>
+    </div>
+    <div class="form-group">
+        <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput type="password" formControlName="password" placeholder="Password">
+        </mat-form-field>
+        <div style="align-content: left; text-align: left; margin-top: -15px;"
+        *ngIf="password.invalid && password.touched">
+        <small *ngIf="password.errors?.required" class="text-danger">Password is required</small>
+    </div>
+
+    </div>
+    <div class="checkbox-container">
+        <mat-checkbox formControlName="checkBox" [(ngModel)]="checked">keep me logged in</mat-checkbox>
+        <span class="forgotPassword" style="white-space: nowrap;" (click)="ForgotPassword()">Forgot Password?</span>
+    </div>
+    <button class="login-btn" type="submit" mat-raised-button>Login</button>
+</form>
+</div>
+</div>

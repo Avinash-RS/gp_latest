@@ -1,0 +1,26 @@
+<aside id="sidebar-wrapper" class="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <li class="wekan-logo">
+            <img src="../../../assets/Group 7.svg" alt="">
+        </li>
+        <li [matTooltipPosition]="position" matTooltip="Dashboard" style="cursor: pointer;">
+            <a class="box" [routerLink]="['/p/' + selectedProduct]+ '/m'" [routerLinkActiveOptions]="{exact:
+                    false}" routerLinkActive="active" style="text-decoration-color: none;"><i
+                    style="font-size: 20px; outline: none;" class="icon-dashboard icomoon"></i>
+            </a>
+        </li>
+        <li [matTooltipPosition]="position" matTooltip="Teams" style="cursor: pointer;">
+            <a class="box" [routerLink]="['/p/' + selectedProduct + '/t']" [routerLinkActiveOptions]="{exact:
+                    false}" routerLinkActive="active" style="text-decoration: none;"><i
+                    style="font-size: 16px; outline: none;" class="icon-team icomoon"></i>
+            </a>
+        </li>
+        <li [matTooltipPosition]="position" matTooltip="Power BI" style="cursor: pointer;">
+            <a class="box" [routerLink]="['/p/' + selectedProduct + '/powerBI']" [routerLinkActiveOptions]="{exact:
+                        false}" routerLinkActive="active" style="text-decoration: none;"><i
+                    style="font-size: 16px; outline: none;" class="icon-powerbi icomoon"></i>
+            </a>
+        </li>
+
+    </ul>
+</aside>

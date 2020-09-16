@@ -1,0 +1,65 @@
+<div class="member-wrapper">
+    <mat-card *ngIf="users && users.length === 0" class="memberCard no-data">
+      No Members to list
+    </mat-card>
+  <mat-card *ngFor="let user of users" style="position: relative;"
+    [ngClass]="user.isActive === true ? 'memberCard': 'memberCard'">
+    <div *ngIf="ACL.edit !== 'none' && ACL.delete !== 'none'" style="display: flex;width: 100%; position: absolute;top: 0px;left: 0px;">
+        <div style="flex: 1;"></div>
+        <i *ngIf="user.role.slug!=='partner-admin'" style="padding: 20px; cursor: pointer;"
+          [matMenuTriggerFor]="memberInviteQuickMenu" [ngClass]="user.isActive !== true ? 'icon-mEnu icomoon icn-color' : 'icon-mEnu icomoon'"></i>
+        <mat-menu style="position: relative;right: 80px;" #memberInviteQuickMenu="matMenu">
+          <button *ngIf="ACL.edit !== 'none'" mat-menu-item [disabled]="user.isActive !== true" (click)="editUser(user.user._id)">
+            <i class="icon-edit icomoon"></i>
+            <span style="margin: 0 0 0 1em; font-weight: 200">Edit</span>
+          </button>
+          <button *ngIf="ACL.delete !== 'none'" mat-menu-item (click)="deActivateUser(user.user._id, user.isActive)">
+            <i style="color: #000; font-size: 20px;" class="icon-deactivate icomoon"></i>
+            <span
+              style="margin: 0 0 0 1em; font-weight: 200;">{{user.isActive === true ? 'Deactivate' : 'Activate'}}</span>
+          </button>
+        </mat-menu>
+      </div>
+  
+    <div style="position: relative;" [ngClass]="user.isActive === true ? '': 'invited'">
+    <!-- <i *ngIf="user.role._id==='5dea4ca42552330d22027ac4'" class="icon-menu icomoon"></i> -->
+
+    <mat-card-header>
+      <div *ngIf="!user.user.profileImageUrl" class="avatar">
+
+        <div class="avatar-parent-container">
+          <div class="avatar-container-child">
+            <b style="text-transform: uppercase !important;">
+              <span>{{user.user.firstName.slice(0,1)}}</span>
+              <span>{{user.user.lastName.slice(0,1)}}</span>
+            </b>
+          </div>
+        </div>
+      </div>
+      <img *ngIf="user.user.profileImageUrl" mat-card-avatar [src]="user.user.profileImageUrl.startsWith('https://ik.imagekit.io/growthportal') ? BASE_IMAGE_URL + user.user.profileImageUrl.replace('https://ik.imagekit.io/growthportal', '') + '?tr=w-150,h-150' : BASE_IMAGE_URL + user.user.profileImageUrl + '?tr=w-150,h-150'" class="circle img-fluid"
+        alt="">
+      <mat-card-title [ngClass]="!user.user.profileImageUrl ? 'top-space1' : 'top-space'">{{user.user.firstName ? user.user.firstName : 'NA'}}
+        {{user.user.lastName}}</mat-card-title>
+      <mat-card-subtitle [ngClass]="!user.user.profileImageUrl ? 'sub-title' : 'sub-title1'"> {{user.department && user.department.displayName ? user.department.displayName : 'NA'}}&#160;
+        - ({{user.role.displayName ? user.role.displayName : ''}})
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- <div class="chip-style-head">
+        <span class="not-new" *ngFor="let loop of [0, 1, 2, 3, 4, 5, 6, 7]">#Designer</span>
+      </div> -->
+      <div class="container-wrapper-right">
+        <div class="content-top"><span>Phone No.</span>
+          {{user.user.phoneNumber && user.user.phoneNumber.code ? user.user.phoneNumber.code : 'NA'}}&#160;{{user.user.phoneNumber && user.user.phoneNumber.phNumber}}&#160;
+        </div>
+        <div class="content"><span>Current Time</span> {{user.user && user.user.timezone ? user.user.timezone : 'NA'}}&#160;</div>
+      </div>
+      <div class="container-wrapper">
+        <div class="content-top"><span>Email</span> {{user.user && user.user.email ? user.user.email : 'NA'}}&#160;</div>
+        <div class="content"><span>Location</span> {{user.user && user.user.location ? user.user.location : 'NA'}}&#160;</div>
+      </div>
+    </mat-card-content>
+  </div>
+  </mat-card>
+</div>

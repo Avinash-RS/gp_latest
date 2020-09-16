@@ -1,0 +1,41 @@
+.mat-icon.mat-primary {
+    color: #6ac259;
+  }
+  .mat-icon.mat-warn {
+    color: #ff0000c2;
+  }
+  
+  .forgetPasswordSuccessButton {
+    top: 20px;
+    height: 45px;
+    background-color: #09a79e;
+    width: 160px;
+    color: #ffffff;
+  }
+  .forgetPasswordErrorButton {
+    top: 20px;
+    height: 45px;
+    background-color: #ff0000c2;
+    width: 160px;
+    color: #ffffff;
+  }
+
+  .forgetPopupText {
+    margin-top: 10px;
+    font-weight: 100;
+    font-size: 16px;
+    opacity: 1;
+  }
+  .buttonTextColor {
+      font-weight: 300;
+      color: #ffffff;
+  }
+  .dialog-icon {
+      font-size: 80px !important;
+      width: 80px !important;
+      height: 80px !important;
+  }
+  .cdk-overlay-backdrop.cdk-overlay-backdrop-showing {
+    opacity: 0.8;
+    background: black;
+  }

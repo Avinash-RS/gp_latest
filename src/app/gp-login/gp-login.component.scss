@@ -1,0 +1,60 @@
+.login-wrapper {
+  position: relative;
+  .logo {
+    position: relative;
+  }
+  .bg {
+    display: grid;
+    grid-template-columns: 40fr 60fr;
+    .one {
+      background: #1e1936;
+      flex: 1;
+      height: 100vh;
+      position: relative;
+      .logo {
+        position: relative;
+        top: 10%;
+        right: 30%;
+        .logo-img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+        }
+      }
+      img {
+        position: relative;
+        height: 15rem;
+        width: 20rem;
+        left: 40%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .flag-signup {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+      }
+    }
+    .two {
+      height: 100vh;
+      flex: 1;
+      background: #fff;
+    }
+  }
+  .login {
+    position: absolute;
+    height: 80vh;
+    width: 50vw;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 35%;
+    z-index: 1;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 3px 0 #00000029;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

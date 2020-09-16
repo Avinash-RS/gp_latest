@@ -1,0 +1,17 @@
+.layout {
+    display: flex;
+    main {
+        position: relative;
+        // width: 100%; // Added sridhar
+        width: calc(100% - 110px);
+        margin: 20px;
+    }
+}
+
+.footer {
+    margin: 2em 0.5em 0 0;
+    text-align: right;
+    opacity: 0.5;
+    font-weight: 200;
+    font-size: 11px;
+}

@@ -1,0 +1,109 @@
+<ng-container *ngIf="editData===true && !fname">
+    <mat-spinner class="spinner" diameter="50" mode="indeterminate"></mat-spinner>
+</ng-container>
+
+
+<div class="add-member-wrapper">
+    <div class="heading">
+        {{titleCard}}
+    </div>
+    <!-- {{addMembersForm.value | json}} -->
+    <form  *ngIf="editData && fname || !editData" (ngSubmit)="addMember()" [formGroup]="addMembersForm">
+        <div class="login-form">
+
+            <div class="form-group">
+                <mat-form-field appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input *ngIf="editData===true" matInput type="text" formControlName="firstName" matTooltipClass="primary-tooltip" 
+                        matTooltip="Non-Editable" placeholder="First Name" readonly>
+                    <input *ngIf="editData!==true" matInput type="text" formControlName="firstName"
+                        placeholder="First Name">
+                </mat-form-field>
+                <div style="align-content: left; text-align: left; margin-top: -15px; padding: 0 !important;"
+                    *ngIf="firstName.invalid && firstName.touched">
+                    <small *ngIf="firstName.errors?.required" class="text-danger">First Name is required</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <mat-form-field appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input *ngIf="editData===true" matInput type="text" formControlName="lastName" matTooltipClass="primary-tooltip" 
+                        matTooltip="Non-Editable" placeholder="Last Name" readonly>
+                    <input *ngIf="editData!==true" matInput type="text" formControlName="lastName"
+                        placeholder="Last Name">
+                </mat-form-field>
+                <div style="align-content: left; text-align: left; margin-top: -15px; padding: 0 !important;"
+                    *ngIf="lastName.invalid && lastName.touched">
+                    <small *ngIf="lastName.errors?.required" class="text-danger">Last Name is required</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <mat-form-field appearance="outline">
+                    <mat-label>Email</mat-label>
+                    <input *ngIf="editData===true" matInput type="email" formControlName="userEmail" placeholder="Email" matTooltipClass="primary-tooltip" 
+                        matTooltip="Non-Editable" readonly>
+                    <input *ngIf="editData!==true" matInput type="email" formControlName="userEmail"
+                        placeholder="Email">
+                </mat-form-field>
+                <div style="align-content: left; text-align: left; margin-top: -15px; padding: 0 !important;"
+                    *ngIf="userEmail.invalid && userEmail.touched">
+                    <small *ngIf="userEmail.errors?.required" class="text-danger">Please fill Email ID</small>
+                    <small *ngIf="userEmail.errors?.pattern" class="text-danger">Please enter a valid email</small>
+                </div>
+            </div>
+            <!-- <div class="form-group">
+            <mat-form-field appearance="outline">
+                <mat-label>Phone Number</mat-label>
+                <input matInput type="text" formControlName="phoneNo" placeholder="Phone Number">
+            </mat-form-field>
+            <div style="align-content: left; text-align: left; margin-top: -15px; padding: 0 !important;"
+                *ngIf="phoneNo.invalid && phoneNo.touched">
+                <small *ngIf="phoneNo.errors?.required" class="text-danger">Phone Number is required</small>
+            </div>
+        </div>
+        <div class="form-group">
+            <mat-form-field appearance="outline">
+                <mat-label>Location</mat-label>
+                <input matInput type="text" formControlName="location" placeholder="Location">
+            </mat-form-field>
+            <div style="align-content: left; text-align: left; margin-top: -15px; padding: 0 !important;"
+                *ngIf="location.invalid && location.touched">
+                <small *ngIf="location.errors?.required" class="text-danger">Location is required</small>
+            </div>
+        </div> -->
+            <div class="form-group">
+                <mat-form-field appearance="outline">
+                    <mat-label>Department</mat-label>
+                    <mat-select formControlName="department" [(value)]="selectedDept" name="dept"
+                        placeholder="Department" required>
+                        <mat-option *ngFor="let dept of departmentsArr" value="{{dept._id}}">
+                            {{dept.displayName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div style="align-content: left; text-align: left; margin-top: -15px; padding: 0 !important;"
+                    *ngIf="department.invalid && department.touched">
+                    <small *ngIf="department.errors?.required" class="text-danger">Please Select Department</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <mat-form-field appearance="outline">
+                    <mat-label>Role</mat-label>
+                    <mat-select formControlName="role" [(value)]="selectedRole" name="role" placeholder="Role" required>
+                        <mat-option *ngFor="let role of roles" value="{{role._id}}">
+                            {{role.displayName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div style="align-content: left; text-align: left; margin-top: -15px; padding: 0 !important;"
+                    *ngIf="role.invalid && role.touched">
+                    <small *ngIf="role.errors?.required" class="text-danger">Please Select Role</small>
+                </div>
+            </div>
+        </div>
+        <div class="submit-btn">
+            <button class="cancel-btn" (click)="cancel()" type="button" mat-raised-button>Cancel</button>
+            <button class="update-btn" type="submit" mat-raised-button>{{editData ? 'Update' : 'Add'}}</button>
+        </div>
+    </form>
+</div>

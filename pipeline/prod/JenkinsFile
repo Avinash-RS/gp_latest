@@ -1,0 +1,53 @@
+pipeline {
+    agent any
+    options {
+      timeout(time: 10, unit: 'MINUTES') 
+    }
+    environment {
+        BRANCH = 'master'
+        FRONTEND_BRANCH = '*/master'
+        REMOTE_FILE = 'frontend/pipeline/prod/remote.sh'
+        CODE_PATH = '/home/ubuntu/GP/frontend/gp-frontend/'
+    }
+
+    stages {
+        stage("Pre Clean") {
+            steps {
+                echo 'Cleaning before execution....'
+                cleanWs()
+            }
+        }
+        stage("Git Pull"){
+            steps {
+                checkout([
+                  $class: 'GitSCM',
+                  branches: [[name: env.FRONTEND_BRANCH]],
+                  doGenerateSubmoduleConfigurations: false,
+                  extensions: [[$class: 'RelativeTargetDirectory', relativeTargetDir: 'frontend']],
+                  submoduleCfg: [],
+                  userRemoteConfigs: [[
+                    url: 'git@bitbucket.org:We-Kan-Code/gp-frontend.git'
+                  ]]
+        ])
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Deploying....'
+                sh "chmod +x $REMOTE_FILE"
+                sh "$REMOTE_FILE"
+                echo 'Deploying Success....'
+            }
+        }
+        stage('Post Clean') {
+            steps {
+                cleanWs()
+            }
+        }
+    }
+    post {
+        always {           
+            mail bcc: '', body: "${currentBuild.currentResult}: Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}", cc: 'deepakr@wekancode.com,ramachandrang@wekancode.com', from: 'notifications@mg.wekan.company', replyTo: '', subject: "GROWTH PORTAL FRONTEND | Jenkins Build ${currentBuild.currentResult}: Job ${env.JOB_NAME}", to: 'avinasirs@wekancode.com'
+        }
+    }
+}

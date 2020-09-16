@@ -1,0 +1,202 @@
+<div class="back-button"><a (click)="backToDashboard()">&lt; Back to Dashboard</a></div>
+
+<div class="filterWrapper" *ngIf="noMilestoneShow !== 'true'">
+    <div class="leftFilter">
+        <div>
+            <div class="auto-width outerWrapper" style="min-width: 180px !important; max-width: 100% !important;">
+                <mat-form-field>
+                    <mat-select [(value)]="selectedSprint" (selectionChange)="onSprintChange(selectedSprint)">
+                        <mat-option class="mat-text" *ngFor="let item of sprintsArr" value="{{item.milestone}}">
+                            {{ item.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div *ngIf="showFutureSprint === false" class="txt-left"
+                    style="min-width: 180px !important; max-width: 100% !important;">{{sprintStartDate}} -
+                    {{sprintEndDate}}</div>
+                <div *ngIf="showFutureSprint === true" class="txt-left"
+                    style="min-width: 180px !important; max-width: 100% !important;">Future Sprint</div>
+            </div>
+        </div>
+        <div class="padT26">
+            <div class="txt">Type</div>
+            <div class="auto-width txt-1">
+                <mat-form-field>
+                    <mat-select [(value)]="selectedType" (selectionChange)="onTypeChange(selectedType)">
+                        <mat-option *ngFor="let type of types" value="{{type.id}}">
+                            {{type.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="assigneeList.length > 0" class="rightFilter">
+        <div class="title">Assignees</div>
+        <div class="userAvatarWrapper">
+            <a *ngFor="let assignee of assigneeList" matTooltipClass="primary-tooltip" 
+                [matTooltip]="assignee.key ? assignee.key.toUpperCase() : 'No Assignee'" class="userAvatar"><img
+                    src="{{assignee.avatarURL}}" alt="avatar"></a>
+        </div>
+    </div>
+</div>
+
+
+<mat-card class="mat-card-wrapper3" *ngIf="showStories === true &&  noMilestoneShow !== 'true' ">
+    <div (click)="particularStoryTasks('AllStories')" class="mat-style-head-story sticky-class"
+        [ngClass]="activeAll ? 'active' : ''">
+        <div style="flex: 1;">
+            <!-- <div class="summary-txt-head">{{(storiesArray.length === 0 ? 'No Stories Available' : 'All Stories')}}</div> -->
+            <div class="summary-txt-head" *ngIf="storiesArray && storiesArray.length === 0">No Stories Available</div>
+            <div class="summary-txt-head" *ngIf="storiesArray && storiesArray.length !== 0">All Stories</div>
+        </div>
+    </div>
+    <div *ngFor="let list of storiesArray; let i = index" (click)="particularStoryTasks(list._id)"
+        [ngClass]="this.selectedIndex === list._id ? 'mat-style-head active': 'mat-style-head'">
+        <div style="flex: 1;">
+            <div class="summary-txt-head" style="margin: 0 0 1em 0 !important;">{{list.summary}} </div>
+            <div class="chip-style-head">
+                <span class="not-new">{{list.status | uppercase}}</span>
+                <span class="new" *ngIf="list.isNewTask === true">NEW</span>
+            </div>
+        </div>
+    </div>
+</mat-card>
+
+
+<mat-card class="mat-card-wrapper" *ngIf="noMilestoneShow !== 'true'">
+    <div class="inside-wrapper">
+        <div class="head">To-Do</div>
+        <ng-container *ngIf="toDo == 0 && showToDoErrorText != true">
+            <div class="mat-style">
+                <div
+                    style="flex: 1; min-height: 420px; display: flex; justify-content: center; align-items: center; font-size: 14px; font-weight: 200;">
+                    Filter Applied
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="showToDoErrorText == true">
+            <div class="mat-style">
+                <div
+                    style="flex: 1; min-height: 420px; display: flex; justify-content: center; align-items: center; font-size: 14px; font-weight: 200;">
+                    No To-Do Available
+                </div>
+            </div>
+        </ng-container>
+        <div *ngFor="let list of toDo" class="mat-style">
+            <div style="flex: 1;">
+                <p class="summary-txt">{{list.summary}} </p>
+                <div class="chip-style">
+                    <span class="not-new">{{list.status | uppercase}}</span>
+                    <span class="new" *ngIf="list.isNewTask === true">NEW</span>
+                    <div class="avatar">
+                        <div class="avatar-parent-container" *ngIf="list.fName">
+                            <div class="avatar-container-child" matTooltipClass="primary-tooltip" 
+                                [matTooltip]="list.profileImageUrl ? list.fName.toUpperCase() + ' ' + list.lName.toUpperCase() : 'No Assignee'">
+
+                                <img *ngIf="list.profileImageUrl"
+                                    src="{{list.profileImageUrl ? list.profileImageUrl : ''}}" alt="">
+                                <b *ngIf="list.profileImageUrl === null"
+                                    style="text-transform: uppercase !important;">
+                                    <span>{{list.fName.slice(0,1)}}</span>
+                                    <span>{{list.lName.slice(0,1)}}</span>
+                                </b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="inside-wrapper">
+        <div class="head">In-Progress</div>
+        <ng-container *ngIf="inProgress == 0 && showInProgressErrorText !=true">
+            <div class="mat-style">
+                <div
+                    style="flex: 1; min-height: 420px; display: flex; justify-content: center; align-items: center; font-size: 14px; font-weight: 200;">
+                    Filter Applied
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="showInProgressErrorText == true">
+            <div class="mat-style">
+                <div
+                    style="flex: 1; min-height: 420px; display: flex; justify-content: center; align-items: center; font-size: 14px; font-weight: 200;">
+                    No In-Progress Available
+                </div>
+            </div>
+        </ng-container>
+        <div *ngFor="let list of inProgress" class="mat-style">
+            <div style="flex: 1;">
+                <p class="summary-txt">{{list.summary}} </p>
+                <div class="chip-style">
+                    <span class="not-new">{{list.status | uppercase}}</span>
+                    <span class="new" *ngIf="list.isNewTask === true">NEW</span>
+                    <div class="avatar">
+                            <div class="avatar-parent-container" *ngIf="list.fName">
+                                <div class="avatar-container-child" matTooltipClass="primary-tooltip" 
+                                    [matTooltip]="list.profileImageUrl ? list.fName.toUpperCase() + ' ' + list.lName.toUpperCase() : 'No Assignee'">
+              
+                                    <img *ngIf="list.profileImageUrl"
+                                    src="{{list.profileImageUrl ? list.profileImageUrl : ''}}"
+                                    alt="">
+                                        <b *ngIf="list.profileImageUrl === null"
+                                        style="text-transform: uppercase !important;">
+                                        <span>{{list.fName.slice(0,1)}}</span>
+                                        <span>{{list.lName.slice(0,1)}}</span>
+                                    </b>
+                                </div>
+                            </div>
+                            </div>
+                              </div>
+            </div>
+        </div>
+    </div>
+    <div class="inside-wrapper">
+        <div class="head">Completed</div>
+        <ng-container *ngIf="completed == 0 && showCompletedErrorText != true">
+            <div class="mat-style">
+                <div
+                    style="flex: 1; min-height: 420px; display: flex; justify-content: center; align-items: center; font-size: 14px; font-weight: 200;">
+                    Filter Applied
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="showCompletedErrorText == true">
+            <div class="mat-style">
+                <div
+                    style="flex: 1; min-height: 420px; display: flex; justify-content: center; align-items: center; font-size: 14px; font-weight: 200;">
+                    No Completed Available
+                </div>
+            </div>
+        </ng-container>
+        <div *ngFor="let list of completed" class="mat-style">
+            <div style="flex: 1;">
+                <p class="summary-txt">{{list.summary}} </p>
+                <div class="chip-style">
+                    <span class="not-new">{{list.status | uppercase}}</span>
+                    <span class="new" *ngIf="list.isNewTask === true">NEW</span>
+                    <div class="avatar">
+                            <div class="avatar-parent-container" *ngIf="list.fName">
+                                <div class="avatar-container-child" matTooltipClass="primary-tooltip" 
+                                    [matTooltip]="list.profileImageUrl ? list.fName.toUpperCase() + ' ' + list.lName.toUpperCase() : 'No Assignee'">
+              
+                                    <img *ngIf="list.profileImageUrl"
+                                    src="{{list.profileImageUrl ? list.profileImageUrl : ''}}"
+                                    alt="">
+                                        <b *ngIf="list.profileImageUrl === null"
+                                        style="text-transform: uppercase !important;">
+                                        <span>{{list.fName.slice(0,1)}}</span>
+                                        <span>{{list.lName.slice(0,1)}}</span>
+                                    </b>
+                                </div>
+                            </div>
+                            </div>
+                              </div>
+            </div>
+        </div>
+    </div>
+
+</mat-card>

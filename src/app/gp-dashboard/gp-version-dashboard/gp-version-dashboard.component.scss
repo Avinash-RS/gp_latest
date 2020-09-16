@@ -1,0 +1,114 @@
+.card-wrapper1 {
+padding: 0px !important;
+margin-top:2em; 
+border: none;
+// filter: drop-shadow(4px 0 0px #00000019); 
+border-radius: 24px 24px 0 0;
+background: #FBFBFB;
+.version-and-comments {
+    display: flex;
+    justify-content: space-between;
+//    background: rgb(255, 255, 255) 0% 0% no-repeat padding-box;
+    padding: 0px !important;
+    margin: 0px;
+    ::ng-deep .mat-form-field-underline {
+        display: none;
+      }
+        div {
+            margin-left: 22px;
+        display: flex;
+        align-items: center;
+        i { margin: 0px; }
+    }
+    .comments {
+        font-size: 12.5px;
+        align-items: center;
+        font-weight: 200;
+        margin-right: 18px;
+    }
+    .mat-text {
+        font-weight: 200;
+        font-size: 16px;
+        width: 100%;
+    }
+    
+}
+}
+
+.card-wrapper {
+    margin: auto; 
+    margin-top:0em; 
+//    filter: drop-shadow(0 0 4px #00000019); 
+    border-radius: 0 0 24px 24px;
+    padding:  0px 48px 31px 26px;
+.version-and-comments {
+    display: flex;
+    justify-content: space-between;
+//    background: rgb(255, 255, 255) 0% 0% no-repeat padding-box;
+    padding: 5px;
+    margin: 0px;
+    div {
+        display: flex;
+        align-items: center;
+        i { margin: 5px; }
+    }
+    .comments {
+        font-size: 12px;
+        font-weight: 200;
+        align-items: center;
+    }
+}
+.sprint-text {
+    font-size: 16px;
+    font-weight: 200;
+    color: #3B3B3B;
+}
+.mat-text {
+    font-weight: 200;
+    font-size: 16px;
+    width: 100%;
+}
+::ng-deep .mat-form-field-underline {
+    display: none;
+  }
+
+.sprint-shirt {
+    display: flex;
+    padding-top: 45px;
+    .left-part {
+        flex: 1;
+    }
+}
+
+}
+// CSS - Fix alignment
+.mat-select-panel {
+    margin-top: 2em;
+  }
+  .spinner {
+    display: block;
+    position: fixed;
+    z-index: 1031;
+    top: 50%;
+    right: 50%; /* or: left: 50%; */
+  }
+  .cus-gandu-chart-wrapper {
+      background: #fff !important;
+      overflow: hidden;
+  }
+  .some-placeholder {
+      width: 100%;
+      height: 140px;
+      background: #fff;
+      position: absolute;
+      top: 0px;
+      left: 0px;
+  }
+  .some-placeholder-foot {
+      position: absolute;
+      width: 100%;
+      height: 75px;
+      background: #fff;
+      bottom: 0;
+      left: 0;
+  }

@@ -1,0 +1,28 @@
+<div class="sprint-story-store">
+    <div class="with-tab spaceTab">
+        <!-- <mat-tab-group>
+            <mat-tab label="STORES">
+                <app-gp-stories-tab></app-gp-stories-tab>
+            </mat-tab>
+            <mat-tab label="TASKS">
+                <app-gp-stories-tab></app-gp-stories-tab>
+            </mat-tab>
+        </mat-tab-group> -->
+        <div class="table-group">
+                <div class="table-title">
+                    <div [ngClass]="tabChange?'tab-active':''" (click)="tabChange = true" > <span>STORIES</span> </div>
+                    <div [ngClass]="!tabChange?'tab-active':''" (click)="tabChange = false" > <span>TASKS</span> </div>
+                </div>
+                <div class="table-group-items">
+                    <div *ngIf="tabChange"> <app-gp-stories-tab type="story" [data]="storiesData" ></app-gp-stories-tab> </div>
+                    <div *ngIf="!tabChange"> <app-gp-stories-tab type="task" [data]="tasks"></app-gp-stories-tab> </div>
+                </div>
+            </div>
+    </div>
+    <div class="with-tab">
+        <div class="story-header">
+            BUGS
+        </div>
+        <app-gp-stories-tab type="bugs" [data]="bugs"></app-gp-stories-tab>
+    </div>
+</div>

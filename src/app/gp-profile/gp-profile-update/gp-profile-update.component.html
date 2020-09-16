@@ -1,0 +1,244 @@
+<div class="profile-wrapper">
+    <div class="left-part">
+        <form [formGroup]="uploadForm" class="left-part-child">
+            <div class="profile-img">
+                <ng-container *ngIf="!profileLoader">
+                    <mat-spinner class="profile-spinner" diameter="50" mode="indeterminate"></mat-spinner>
+                </ng-container>
+                <!-- <div class="avatar">
+                    <div class="avatar-parent-container">
+                        <div class="avatar-container-child">
+            
+                            <img *ngIf="url"
+                                src="{{BASE_IMAGE_URL}}{{url ? url : ''}}?tr=w-150,h-150" alt="">
+                            <b *ngIf="!url && fName"
+                                style="text-transform: uppercase !important;">
+                                <span>{{fName.slice(0,1)}}</span>
+                                <span>{{lName.slice(0,1)}}</span>
+                            </b>
+                        </div>
+                    </div>
+                </div> -->
+
+                <div class="avatar">
+                    <label class="hoverable" for="fileInput">
+                        <div class="avatar-parent-container">
+                            <div class="avatar-container-child">
+
+                                <img *ngIf="url" [src]="url ? imageBaseUrl + url + '?tr=w-150,h-150' : selectedImage"
+                                    (load)="afterImgLoad()">
+                                <b *ngIf="!url && fName" style="text-transform: uppercase !important;">
+                                    <span>{{fName.slice(0,1)}}</span>
+                                    <span>{{lName.slice(0,1)}}</span>
+                                </b>
+                            </div>
+                        </div>
+                        <div class="hover-text"><i style="font-size: 15px; color: #23A39B;"
+                                class="icon-edit icomoon"></i></div>
+                        <!-- <div class="edit-icon">hi</div> -->
+                        <div class="background"></div>
+                    </label>
+                    <br />
+                    <input id="fileInput" type='file' name="profile" accept="image/*" (change)="onSelectFile($event)">
+                    <button *ngIf="showDeleteButton === true" (click)="delete()">Remove</button>
+                </div>
+                <!-- <span>part one</span> -->
+            </div>
+        </form>
+        <!-- <div class="profile-help">
+            <span>feedbcak</span>
+        </div> -->
+    </div>
+    <div class="right-part">
+        <mat-tab-group style="height: 100%;">
+            <mat-tab style="height: 100%;" label="Edit Profile">
+                <ng-container *ngIf="!fName">
+                    <mat-spinner class="spinner" diameter="50" mode="indeterminate"></mat-spinner>
+                </ng-container>
+                <div class="min-width-800">
+
+                    <form *ngIf="fName" class="cus-form" (ngSubmit)="profileUpdate()" [formGroup]="addMembersForm">
+                        <div class="login-form">
+                            <div class="form-group">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>First Name</mat-label>
+                                    <input *ngIf="editData!==true" matInput type="text" formControlName="firstName"
+                                        placeholder="First Name" required>
+                                </mat-form-field>
+                                <div style="align-content: left; text-align: left; margin-top: -15px; padding: 0 !important;"
+                                    *ngIf="firstName.invalid && firstName.touched">
+                                    <small *ngIf="firstName.errors?.required" class="text-danger">First Name is
+                                        required</small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Last Name</mat-label>
+                                    <input *ngIf="editData!==true" matInput type="text" formControlName="lastName"
+                                        placeholder="Last Name" required>
+                                </mat-form-field>
+                                <div style="align-content: left; text-align: left; margin-top: -15px; padding: 0 !important;"
+                                    *ngIf="lastName.invalid && lastName.touched">
+                                    <small *ngIf="lastName.errors?.required" class="text-danger">Last Name is
+                                        required</small>
+                                </div>
+                            </div>
+                            <!-- <div class="form-group">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Email</mat-label>
+                                    <input *ngIf="editData===true" matInput type="email" formControlName="userEmail"
+                                        placeholder="Email" matTooltip="Non-Editable" readonly>
+                                    <input *ngIf="editData!==true" matInput type="email" formControlName="userEmail"
+                                        placeholder="Email">
+                                </mat-form-field>
+                                <div style="align-content: left; text-align: left; margin-top: -15px; padding: 0 !important;"
+                                    *ngIf="userEmail.invalid && userEmail.touched">
+                                    <small *ngIf="userEmail.errors?.required" class="text-danger">Email is
+                                        required</small>
+                                    <small *ngIf="userEmail.errors?.pattern" class="text-danger">Please enter a valid
+                                        email</small>
+                                </div>
+                            </div> -->
+                            <div class="form-group phone-code">
+                                <mat-form-field appearance="outline" style="width: 30px !important;">
+                                    <mat-label>Phone Code</mat-label>
+                                    <mat-select formControlName="phoneCode" [(value)]="selectedDialCode" name="dept"
+                                        placeholder="Phone Code" aria-autocomplete="phoneCode">
+                                        <mat-option (click)="noPhoneCode()">None</mat-option>
+                                        <mat-option *ngFor="let tel of telCodeArr" value="{{tel.dial_code}}">
+                                            {{tel.dial_code}} {{tel.name}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <div style="align-content: left; text-align: left; margin-top: -15px; margin-left: 1em; padding: 0 !important;"
+                                    *ngIf="phoneCode.invalid">
+                                    <small *ngIf="phoneCode.errors?.required" class="text-danger">Code is
+                                        required</small>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Phone Number</mat-label>
+                                    <input matInput type="text" formControlName="phoneNo" placeholder="Phone Number">
+                                </mat-form-field>
+                                <div style="align-content: left; text-align: left; margin-top: -15px; margin-left: 1em; padding: 0 !important;"
+                                    *ngIf="phoneNo.invalid">
+                                    <small *ngIf="phoneNo.errors?.required" class="text-danger">Phone Number is
+                                        required</small>
+                                    <small *ngIf="phoneNo.errors?.pattern" class="text-danger">Please enter only numbers
+                                        in phone number field</small>
+                                    <small *ngIf="phoneNo.errors?.maxlength && !phoneNo.errors?.pattern"
+                                        class="text-danger">Phone Number cannot
+                                        exceed 15 numbers</small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Location</mat-label>
+                                    <input matInput type="text" formControlName="location" placeholder="Location"
+                                        name="locations">
+                                </mat-form-field>
+                                <!-- <agm-map [latitude]="latitude" [longitude]="longitude" [scrollwheel]="false"
+                                    [zoom]="zoom">
+                                    <agm-marker [latitude]="latitude" [longitude]="longitude"></agm-marker>
+                                </agm-map> -->
+                            </div>
+                            <div class="form-group">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Timezone</mat-label>
+                                    <!-- formControlName="timezone" -->
+                                    <input matInput placeholder="State" aria-label="State" [matAutocomplete]="auto"
+                                        [formControl]="stateCtrl" [(ngModel)]="selectedTimezoneInput">
+                                    <!-- <mat-select formControlName="timezone" [(value)]="selectedTimezone" name="timezone"
+                                            placeholder="timezone" required [matAutocomplete]="auto"> -->
+                                    <mat-autocomplete #auto="matAutocomplete">
+                                        <mat-option *ngFor="let state of filteredStates | async"
+                                            (click)="tabChange(state.utc[0])" [value]="state.utc[0]">
+                                            <span>{{state.abbr}}</span> |
+                                            <small>{{state.text}}</small>
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                    <!-- </mat-select> -->
+                                </mat-form-field>
+                                <div *ngIf="errorMsg && errorMsg !== ''"
+                                    style="align-content: left; text-align: left; margin-top: -15px; margin-left: 1em">
+                                    <small class="text-danger">{{errorMsg}}</small>
+                                </div>
+                                <!-- <div style="align-content: left; text-align: left; margin-top: -15px; padding: 0 !important;"
+                                    *ngIf="timezone.invalid && timezone.touched">
+                                    <small *ngIf="timezone.errors?.required" class="text-danger">Timezone is
+                                        required</small>
+                                </div> -->
+                            </div>
+
+                            <div class="submit-btn">
+                                <!--  [disabled]="!addMembersForm.valid" -->
+                                <button class="update-btn" (click)="cancel()" type="button"
+                                    mat-raised-button>Cancel</button>
+                                <button class="update-btn" type="submit" mat-raised-button>Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </mat-tab>
+            <mat-tab class="tab-2" style="height: 100%;" label="Change Password">
+                <div class="min-width-800">
+                    <form *ngIf="fName" class="cus-form" (ngSubmit)="updatePassword()" [formGroup]="passwordResetForm">
+                        <div class="login-form">
+                            <div class="form-group">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>New Password</mat-label>
+                                    <input matInput type="password" formControlName="password" placeholder="Password">
+                                </mat-form-field>
+                                <div style="align-content: left; text-align: left; margin-top: -15px;"
+                                    *ngIf="password.invalid && password.touched">
+                                    <small *ngIf="password.errors?.required" class="text-danger">Password is
+                                        required</small>
+                                </div>
+                                <div style="align-content: left; text-align: left; margin-top: -15px;" *ngIf="
+                                        passwordResetForm.touched && (
+                                            (passwordResetForm.controls['password'].hasError(
+                                            'minlength') 
+                                            || 
+                                            passwordResetForm.controls['password'].hasError('hasNumber')  
+                                          || 
+                                          passwordResetForm.controls['password'].hasError('hasCapitalCase')  
+                                           ) )
+                                ">
+                                    <small style="text-align: left;" class="text-danger">Password should contain atleast
+                                        minimum of 8 characters <br> along with atleast 1 lowercase, 1 uppercase and 1
+                                        numerics </small>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Repeat Password</mat-label>
+                                    <input matInput type="password" formControlName="confirmPassword"
+                                        placeholder="Confirm Password">
+                                </mat-form-field>
+                                <div style="align-content: left; text-align: left; margin-top: -15px; margin-left: 1em"
+                                    *ngIf="confirmPassword.invalid && confirmPassword.touched">
+                                    <small *ngIf="confirmPassword.errors?.required" class="text-danger">Repeat Password
+                                        is
+                                        required</small>
+                                </div>
+
+                                <div style="align-content: left; text-align: left; margin-top: -15px; margin-left: 1em">
+                                    <small class="text-danger">{{passMismatchText}}</small>
+                                </div>
+                            </div>
+                            <div class="submit-btn-1">
+                                <button class="update-btn" (click)="cancel()" type="button"
+                                    mat-raised-button>Cancel</button>
+                                <button class="update-btn" type="submit" mat-raised-button>Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </mat-tab>
+            <div style="width: 100vw;border-bottom: 5px solid black;"></div>
+        </mat-tab-group>
+    </div>
+</div>

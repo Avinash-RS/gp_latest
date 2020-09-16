@@ -1,0 +1,6 @@
+<div
+  class="loader-overlay d-flex align-items-center justify-content-center"
+  *ngIf="loaderService.isLoading | async"
+>
+  <mat-spinner diameter="50" mode="indeterminate"></mat-spinner>
+</div>

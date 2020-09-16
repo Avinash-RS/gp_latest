@@ -1,0 +1,118 @@
+.tabs {
+  padding: 0 20px 60px 20px;
+  position: relative;
+
+  .example-small-box {
+    width: 100%;
+    max-height: 175px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin-top: 0.5em;
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(35, 163, 154, 0.21);
+      background-color: #f5f5f5;
+    }
+
+    &::-webkit-scrollbar {
+      width: 10px;
+      background-color: #f5f5f5;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(35, 163, 154, 0.21);
+      border: 2px solid rgba(35, 163, 154, 0.21);
+    }
+  }
+
+  .mat-style {
+    // display: grid;
+    // grid-template-columns: 1fr 1fr 1fr;
+    // column-gap: 0em;
+    display: flex;
+    align-items: center;
+    border: 1px solid #d4d4d4;
+    margin: 10px 0px 0 0;
+    border-radius: 4px;
+    min-height: 65px;
+    padding: 10px;
+    .summary-txt {
+      font-size: 13px;
+      font-weight: 400;
+      color: #000000 !important;
+      line-height: 1.5;
+      text-align: justify;
+    }
+  }
+  .chip-style {
+    .new {
+      padding: 4px 8px;
+      margin: 3px;
+      background: rgba(46, 35, 163, 0.17);
+      font-size: 9px;
+      font-weight: 600;
+      border-radius: 3px;
+      color: #4F23A3;
+    }
+    .not-new {
+      padding: 4px 8px;
+      margin: 3px;
+      background: rgba(35, 163, 154, 0.21);
+      font-size: 9px;
+      font-weight: 600;
+      border-radius: 3px;
+      color: #23a39b;
+    }
+    .avatar {
+      float: right;
+      .avatar-parent-container {
+        color: rgb(255, 255, 255);
+        .avatar-container-child {
+          position: relative;
+          background: rgba(0, 0, 0, 0.2);
+          left: 0px;
+          top: 0px;
+          max-height: 30px;
+          max-width: 30px;
+          min-height: 30px;
+          min-width: 30px;
+          border-radius: 50%;
+          text-align: center;
+          display: inline-block;
+          img {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 0px;
+            left: 0px;
+            border-radius: 50%;
+            z-index: 1;
+          }
+          b {
+            font-weight: 800;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+          }
+        }
+      }
+
+    }
+  }
+  img {
+    height: 22px;
+    width: 22px;
+  }
+
+  .right {
+    position: absolute;
+    top: 250px;
+    cursor: pointer;
+    bottom: 20px;
+    right: 20px;
+    margin: 0px 0 0px 0px;
+    font-weight: 200;
+    color: #23a39b;
+  }
+}

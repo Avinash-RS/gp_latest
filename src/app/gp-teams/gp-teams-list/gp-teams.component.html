@@ -1,0 +1,36 @@
+<router-outlet></router-outlet>
+<div class="filter-wrapper">
+
+  <button *ngIf="ACL.create !== 'none'" mat-raised-button (click)="addMember()" class="btnn">Add Member</button>
+  <div class="auto-width-teams outerWrapper-teams" style="min-width: 75px !important; max-width: 100% !important;">
+    <mat-form-field>
+      <mat-label>Role</mat-label>
+      <!--  [matTooltip]="selectedRoleTip" -->
+      <mat-select [(value)]="selectedRole" [matTooltipPosition]="position" matTooltipClass="primary-tooltip" multiple (selectionChange)="onRoleChange(selectedRole)" name="role" placeholder="Role">
+        <mat-option (click)="changeRole(selectedRole)" value="0">All</mat-option>
+        <mat-option *ngFor="let role of roles" value="{{role._id}}">
+          {{role.displayName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="auto-width-teams outerWrapper-teams" style="min-width: 30px !important; max-width: 100% !important; margin: 0 3em 0 0em;">
+    <mat-form-field>
+      <!--  [matTooltip]="selectedDeptTip" -->
+      <mat-label>Department</mat-label>
+      <mat-select [(value)]="selectedDept" [matTooltipPosition]="position" matTooltipClass="primary-tooltip" multiple (selectionChange)="onDepartmentChange(selectedDept)" name="dept" placeholder="Department">
+        <mat-option (click)="changeDept(selectedDept)" value="0">Select All</mat-option>
+        <mat-option *ngFor="let dept of departmentsArr" value="{{dept._id}}">
+          {{dept.displayName}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+</div>
+
+<div class="teams-wrapper">
+  <app-gp-members *ngIf="usersArr" [users]="usersArr"></app-gp-members>
+
+</div>

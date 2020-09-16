@@ -1,0 +1,39 @@
+<div class="right-part" *ngIf="showRelease === true">
+  <div class="text">Release Date</div>
+  <div class="date">
+    <h1>{{releaseDate}}</h1>
+    <div class="month">{{releaseMonth}}</div>
+    <div class="remaining">{{remainingDays}} days to go</div>
+  </div>
+</div>
+
+<div class="right-part" *ngIf="todayRelease === true">
+  <div class="text">Release Date</div>
+  <div class="date">
+    <h1>{{releaseDate}}</h1>
+    <div class="month">{{releaseMonth}}</div>
+    <div class="remaining">{{remainingDays}}</div>
+  </div>
+</div>
+
+<div class="right-part" *ngIf="alreadyRelease === true">
+  <div class="text">Release Date</div>
+  <div class="date">
+    <h1>{{releaseDate}}</h1>
+    <div class="month">{{releaseMonth}}</div>
+    <div class="remaining">{{remainingDays}}</div>
+  </div>
+</div>
+
+<div class="right-part" *ngIf="notProvided === true">
+  <div class="text">Release Date</div>
+  <div class="date">
+    <div class="remaining noRelease">Release </div>
+    <div class="remaining noRelease">Date</div>
+    <div class="remaining noRelease">not</div>
+    <div class="remaining noRelease">Provided</div>
+    <!-- <h1>{{releaseDate}}</h1>
+          <div class="month">{{releaseMonth}}</div>
+          <div class="remaining">{{remainingDays}}</div> -->
+  </div>
+</div>

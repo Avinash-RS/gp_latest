@@ -1,0 +1,205 @@
+<form class="form-wrapper" [formGroup]="addTaskForm">
+  <!-- <div [ngClass]="(department)?'showContent':'hideContent'"> -->
+  <div>
+    <div class="form-content-wrapper">
+      <div class="example-container-head">
+        <p class="head" *ngIf="department">{{department}}</p>
+        <div class="card-skeleton" *ngIf="!department" style="height: 20px; width: 150px;">
+          <div class="animated-background">
+            <div class="skel-mask-container">
+              <div class="skel-mask skel-mask-1"></div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <i *ngIf="(ACL.edit !== 'none' && ownerId === ACLUserId) && (departmentid === ACLDepartmentId || ACLDepartmentName === 'All')"
+            (click)="edit()" style="font-size: 16px; color: #000;" class="icon-edit icomoon"></i>
+          <i *ngIf="(ACL.delete !== 'none' && ownerId === ACLUserId) && (departmentid === ACLDepartmentId || ACLDepartmentName === 'All')"
+            (click)="delete()" style="font-size: 16px; color: #000;" class="icon-delete icomoon"></i>
+          <i (click)="close()" style="font-size: 14px; color: #000;" class="icon-close icomoon"></i>
+        </div>
+      </div>
+      <div class="example-container">
+        <p class="sub-head1" *ngIf="dueDate"><span><span style="font-weight: 200;">Start date:</span>
+            {{startDate}}</span> <span style="margin: 0 0 0 2em;"><span style="font-weight: 200;">End date:</span>
+            {{dueDate}}</span></p>
+        <!-- <p class="sub-head1" *ngIf="dueDate">End date: {{dueDate}}</p> -->
+        <div class="card-skeleton" *ngIf="!department" style="height: 20px;">
+          <div class="animated-background">
+            <div class="skel-mask-container">
+              <div class="skel-mask skel-mask-1"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="example-container-title">
+        <p class="title-head" *ngIf="displayName">{{displayName}}</p>
+        <div class="card-skeleton" *ngIf="!department" style="height: 20px;">
+          <div class="animated-background">
+            <div class="skel-mask-container">
+              <div class="skel-mask skel-mask-1"></div>
+            </div>
+          </div>
+        </div>
+    </div> -->
+
+      <div class="form-fields">
+        <div class="form-filed-assigneee">
+          STATUS
+        </div>
+        <div class="example-container">
+          <div *ngIf="department" class="dropdown">
+            <button class="btn btn-primary dropdown-toggle status-dropdown" type="button" data-toggle="dropdown"><span
+                [className]="selectedStatus | lowercase">{{selectedStatus | uppercase}}</span>
+              <span class="caret"></span></button>
+            <ul class="dropdown-menu status-list">
+              <li (click)="StatusChange(status)" *ngFor="let status of status">
+                <div [className]="status.status" class="list-color"></div> <span>{{status.name}}</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- <span style="font-size: 13px; font-weight: 200; color: #000; opacity: 0.8;"> {{displayName}} </span> -->
+          <div class="card-skeleton" *ngIf="!department" style="height: 20px;">
+            <div class="animated-background">
+              <div class="skel-mask-container">
+                <div class="skel-mask skel-mask-1"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-filed-assignee">
+          TITLE
+        </div>
+        <div class="example-container">
+          <span style="font-size: 13px; font-weight: 200; color: #000; opacity: 0.8;"> {{displayName}} </span>
+          <div class="card-skeleton" *ngIf="!department" style="height: 20px;">
+            <div class="animated-background">
+              <div class="skel-mask-container">
+                <div class="skel-mask skel-mask-1"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-filed-assignee">
+          DESCRIPTION
+        </div>
+        <div class="example-container">
+          <span style="font-size: 13px; font-weight: 100; color: #000; opacity: 0.8;" [innerHTML]="description">
+            {{description}} </span>
+          <div class="card-skeleton" *ngIf="!department" style="height: 20px;">
+            <div class="animated-background">
+              <div class="skel-mask-container">
+                <div class="skel-mask skel-mask-1"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-filed-assignee">
+          LINKS
+        </div>
+        <div class="example-container" *ngFor="let link of links">
+          <span *ngIf="link.urlName" style="font-size: 13px; font-weight: 100; color: #000; opacity: 0.8;"><a
+              [matTooltip]="link.name.length > 100 ? link.name : link.urlName" matTooltipPosition="before"
+              style="word-break: break-all;" target="_blank"
+              href="{{link.url}}">{{link.name ? '&#8226; ' + link.name.slice(0, 100) : '&#8226; ' + link.urlName}}{{link.name.length > 100 ? '. . . .' : ''}}
+            </a></span>
+          <span *ngIf="!link.urlName" style="font-size: 13px; font-weight: 100; color: #000; opacity: 0.8;">NA</span>
+          <div class="card-skeleton" *ngIf="!department" style="height: 20px;">
+            <div class="animated-background">
+              <div class="skel-mask-container">
+                <div class="skel-mask skel-mask-1"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-filed-assignee">
+          DEPENDENCY
+        </div>
+        <div class="example-container">
+          <span *ngIf="dependencyShowArray && dependencyShowArray.length === 0"
+            style="font-size: 13px; font-weight: 100; color: #000; opacity: 0.8;">NA</span>
+          <ng-container *ngIf="department">
+            <div style="cursor: pointer;" (click)="view(value._id)" class="assigne-wrapper hover-assignee"
+              *ngFor="let value of dependencyShowArray">
+
+              <div [className]="value.departmentSlug"></div>
+              <div class="div-child-2" matTooltipPosition="above"
+              [matTooltip]="value.displayName.length > 16 ? value.displayName : ''" ><span class="child-1">{{value.displayName ? (value.displayName | ellipsis) : 'NA'}}</span> <span
+                  class="child-2">{{value.endDate ? (value.endDate | date) : 'NA'}}</span></div>
+              <div class="div-child-3"> <span [ngClass]="value.status && value.status === 'done' ? 'done' : value.status && value.status === 'in-progress' ? 'in-progress' : value.status && value.status === 'to-do' ? 'to-do' : ''">{{value.status ? (value.status | uppercase) : 'NA' }}</span></div>
+              <!-- <div>{{value.status ? (value.status | uppercase) : 'NA'}}</div> -->
+              <div class="div-child-4">
+                <div [ngClass]="value.assignedTo && value.assignedTo.length === 0 ? 'one-assignees' : ''" style="font-weight: 200;" *ngIf="value.assignedTo && value.assignedTo.length === 0"> NA </div>
+                <div  [ngClass]="value.assignedTo && value.assignedTo.length > 1 ? '' : 'one-assignee'" class="avatars">
+                  <div *ngFor="let avatar of value.assignedTos; let i = index">
+                    <ng-container *ngIf="i < 1">
+                      <img [matTooltip]="avatar.firstName + ' ' + avatar.lastName" *ngIf="avatar.profileImageUrl"
+                        [src]="avatar.profileImageUrl.startsWith('https://ik.imagekit.io/growthportal') ? BASE_IMAGE_URL + avatar.profileImageUrl.replace('https://ik.imagekit.io/growthportal', '') + '?tr=w-150,h-150' : BASE_IMAGE_URL + avatar.profileImageUrl + '?tr=w-150,h-150'"
+                        alt="">
+                      <b style="background: darkblue !important;" [matTooltip]="avatar.firstName + ' ' + avatar.lastName" *ngIf="!avatar.profileImageUrl">
+                          {{avatar.firstName.slice(0,1) + avatar.lastName.slice(0,1)}} 
+                      </b>
+                      <b style="margin-left: 1.5em !important;" matTooltipClass="tooltip-list" matTooltipPosition="above" [matTooltip]="tooltipName(value.assignedTos) | tooltipList" *ngIf="value.assignedTos.length > 1">
+                          +{{value.assignedTos.length - 1}} 
+                      </b>
+                    </ng-container>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+          <div class="card-skeleton" *ngIf="!department" style="height: 20px;">
+            <div class="animated-background">
+              <div class="skel-mask-container">
+                <div class="skel-mask skel-mask-1"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-filed-assignee">
+          ESTIMATE
+        </div>
+        <div class="example-container">
+          <span style="font-size: 13px; font-weight: 100; color: #000; opacity: 0.8;">{{estimate}}d</span>
+          <div class="card-skeleton" *ngIf="!department" style="height: 20px;">
+            <div class="animated-background">
+              <div class="skel-mask-container">
+                <div class="skel-mask skel-mask-1"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-filed-assignee">
+          ASSIGNEES
+        </div>
+        <div class="avatar-parent-container">
+          <span *ngIf="assignedTo && assignedTo.length === 0"
+            style="font-size: 13px; font-weight: 100; color: #000; opacity: 0.8;">NA</span>
+
+          <div class="card-skeleton" style="width: 51px; height: 51px; border-radius: 50% !important;"
+            *ngIf="!assignedTo">
+            <div class="animated-background">
+              <div class="skel-mask-container">
+                <div class="skel-mask skel-mask-1"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="avatar-container-child" matTooltipClass="primary-tooltip"
+            [matTooltip]="avatar.firstName + ' ' + avatar.lastName" *ngFor="let avatar of assignedTo">
+            <img *ngIf="avatar.profileImageUrl"
+              [src]="avatar.profileImageUrl.startsWith('https://ik.imagekit.io/growthportal') ? BASE_IMAGE_URL + avatar.profileImageUrl.replace('https://ik.imagekit.io/growthportal', '') + '?tr=w-150,h-150' : BASE_IMAGE_URL + avatar.profileImageUrl + '?tr=w-150,h-150'"
+              alt="">
+            <b *ngIf="!avatar.profileImageUrl">
+              <span>{{avatar.firstName.slice(0,1)}}</span>
+              <span>{{avatar.lastName.slice(0,1)}}</span>
+            </b>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

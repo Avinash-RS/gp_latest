@@ -1,0 +1,176 @@
+@mixin lg {
+  @media screen and(min-width: 1200px) {
+    @content;
+  }
+}
+@mixin md {
+  @media screen and(max-width: 1200px) and (min-width: 760px) {
+    @content;
+  }
+}
+@mixin sm {
+  @media screen and(max-width: 760px) {
+    @content;
+  }
+}
+
+.member-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  margin: 1em 0 0 1em;
+  @include lg() {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @include md() {
+    grid-template-columns: 1fr 1fr;
+  }
+  @include sm() {
+    grid-template-columns: 1fr;
+  }
+  color: #000 !important;
+  mat-card-title {
+    font-size: 16px;
+    font-weight: 200;
+    margin: 0 0 0 5em;
+  }
+  .top-space1 {
+    margin: 10px 0 2em 4.15em;
+    color: #000;
+  }
+  .top-space {
+    margin: 10px 0 2em 1em;
+    color: #000;
+  }
+  .sub-title {
+    margin: -22px 0 0 5.5em;
+    font-size: 12px;
+    font-weight: 100;
+    color: #000000;
+  }
+  .sub-title1 {
+    margin: -22px 0 0 1.3em;
+    font-size: 12px;
+    font-weight: 100;
+    color: #000000;
+  }
+
+  .memberCard {
+    position: relative;
+    margin: 0 23px 23px 0;
+    min-width: 390px;
+    min-height: 242px;
+    max-width: 100%;
+    max-height: 100%;
+    box-shadow: 0px 0px 6px #00000019;
+    border-radius: 10px;
+    padding: 14px 27px 15px 21px;
+
+    .avatar {
+      position: absolute;
+      .avatar-parent-container {
+        // color: rgb(255, 255, 255);
+        .avatar-container-child {
+          position: relative;
+          background: darkcyan;
+          left: 0px;
+          top: 0px;
+          max-height: 50px;
+          max-width: 50px;
+          min-height: 50px;
+          min-width: 50px;
+          //   font-size: 26px;
+          border-radius: 50%;
+          text-align: left;
+          display: flex;
+          b {
+            font-weight: 800;
+            position: absolute;
+            top: 57%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            span {
+              font-size: 26px;
+              top: 50%;
+              font-weight: 200;
+              color: #fff;
+            }
+          }
+        }
+      }
+    }
+  }
+  .invited {
+    opacity: 0.2;
+  }
+  .memberCard .mat-card-avatar {
+    position: relative;
+    height: 60px;
+    width: 60px;
+  }
+
+  .container-wrapper-right {
+    float: right;
+    margin: 20px 0 0px 0;
+  }
+  .container-wrapper {
+    float: left;
+    margin: 20px 0 0px 0;
+  }
+  .memberCard span {
+    position: relative;
+    font-size: 12px;
+    color: #585858;
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 400;
+  }
+  .content {
+    padding: 0px 0;
+    color: #000 !important;
+    font-weight: 100;
+    margin: 40px 0 0px 0;
+    font-size: 11px;
+  }
+  .content-top {
+    padding: 0px 0;
+    color: #000 !important;
+    font-weight: 100;
+    margin: 16px 0 0 0;
+    font-size: 11px;
+  }
+  .chip-style-head {
+    position: relative;
+    margin: 0em 0 0px 0;
+    .not-new {
+      display: inline-block;
+      padding: 4px 5px;
+      margin: 9px 6px 0 0px;
+      background: rgba(35, 163, 154, 0.21);
+      font-size: 9px;
+      font-weight: 600;
+      border-radius: 2px;
+      color: #23a39b;
+    }
+  }
+}
+.matPanel {
+  position: absolute;
+  float: right;
+}
+mat-menu {
+  float: right;
+}
+.no-data {
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-weight: 200;
+  font-size: 16px;
+}
+
+.icn-color {
+  opacity: 1;
+}

@@ -1,0 +1,9 @@
+<div class="error-wrapper">
+    <div *ngIf="msg !== 'User' && msg !== 'logout'">Do you want to Delete this {{msg}}?</div>
+    <div *ngIf="msg === 'User'">Do you want to {{deleteUserMsg}} this {{msg}}?</div>
+    <div *ngIf="msg === 'logout'">Are you sure you want to Logout?</div>
+    <div class="button-wrapper">
+        <button class="confirm-btn" (click)="confirm()" mat-button> CONFIRM </button>
+            <button class="cancel-btn" mat-button mat-dialog-close> CANCEL</button>
+    </div>
+</div>

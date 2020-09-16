@@ -1,0 +1,23 @@
+div {
+    display: flex;
+    flex-direction: column;
+//    background: #54B6C7;
+    background: rgb(248, 156, 123);
+    position: sticky;    
+    align-content: center;
+    height: 50px;
+    border-radius: 5px;
+//    width: 50%;
+    margin: auto;
+    p {
+        margin: auto;
+        color: black;
+        font-weight: 300;
+        a {
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            cursor: pointer;
+        }
+    }
+}

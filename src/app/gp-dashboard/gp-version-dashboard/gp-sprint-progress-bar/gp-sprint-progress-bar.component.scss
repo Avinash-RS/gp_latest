@@ -1,0 +1,109 @@
+.date-jump {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .content {
+    display: flex;
+    max-width: 300px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .column {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 20px;
+    h3 {
+      font-size: 18px;
+      font-weight: 200;
+      color: #000 !important;
+    }
+    div {
+      font-size: 14px;
+      font-weight: 200;
+    }
+  }
+  .icon {
+    color: #23a39b;
+    height: 100%;
+    background: #eaf6f6 0% 0% no-repeat padding-box;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  .deActive {
+    color: rgb(180, 180, 180);
+    height: 100%;
+    background: #eaf6f6 0% 0% no-repeat padding-box;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    cursor: default;
+  }
+}
+
+.progress-shirt {
+  height: 32px;
+  width: 100%;
+  // background: rgb(228, 251, 255);
+  position: relative;
+  display: flex;
+  transition: 0.5s;
+  .progress-bar {
+    transition: 0.5s;
+    width: 100%;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+    background: #eaf6f6 0% 0% no-repeat padding-box;
+    span {
+      transition: 0.5s;
+      position: absolute;
+      top: 0;
+      left: 0px;
+      height: 100%;
+      background: #23a39b 0% 0% no-repeat padding-box;
+    }
+  }
+  .right-part {
+    margin: 0px 30px 10px 30px;
+    text-align: center;
+    .progress-value {
+      font-weight: 200;
+      font-size: 30px;
+      margin: .10em !important;
+      color: #000 !important;
+      span {
+        font-size: 16px;
+        font-weight: 200;
+      }
+    }
+    .comp {
+      margin-top: 10px !important;
+      font-size: 12px;
+      font-weight: 200;
+    }
+  }
+}
+.hang-chip {
+    margin: 20px 0 0 0;
+    text-align: center;
+    span {
+      border-radius: 3px;
+      padding: 10px 8px;
+      font-size: 13px;
+      font-weight: 200;
+      text-align: center;
+      background: rgba(35, 163, 154, 0.102); 
+      // opacity: 0.09;
+      color: #23A39B;
+    }
+}

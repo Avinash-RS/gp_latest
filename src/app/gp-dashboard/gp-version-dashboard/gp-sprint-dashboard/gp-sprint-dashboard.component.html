@@ -1,0 +1,39 @@
+<ng-container *ngIf="showDashboard == true">
+    <mat-card class="card-wrapper1">
+      <div class="version-and-comments">
+          <div class="auto-width">
+          <mat-form-field>
+            <mat-select class="mat-text" [(value)]="selectedVersion" (selectionChange)="onVersionChange(selectedVersion)">
+              <mat-option class="mat-text" *ngFor="let item of versionArr" value="{{item._id}}">
+                {{ item.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="comments" style="cursor: pointer;" (click)="comments(selectedVersion)">
+          <i style="font-size: 16px;" class="icon-comment icomoon"></i>&#160;
+          <span>COMMENTS</span>
+        </div>
+      </div>
+    
+    </mat-card>
+    <mat-card class="card-wrapper" #show>
+      <div class="test">
+        <div class="sprint-shirt">
+          <div class="left-part">
+              <!-- <ng-container *ngIf="!versionArr || !stories">
+                  <mat-spinner class="spinner" diameter="50" mode="indeterminate"></mat-spinner>
+              </ng-container> -->
+              <app-gp-sprint-progress-bar *ngIf="versionArr" [sprints]="sprintsArr"></app-gp-sprint-progress-bar>
+            </div>
+          <app-gp-sprint-launchdate *ngIf="versionArr" [sprints]="sprintsArr" style="margin-left: 80px; margin-top: -1em"></app-gp-sprint-launchdate>
+        </div>
+        <div style="padding-bottom: 2.35em; border-bottom: solid #979797 1px; opacity: 0.2;">&#160;</div>
+        
+        <app-gp-sprint-stories-board [stories]="stories"></app-gp-sprint-stories-board>
+      </div>
+    </mat-card>
+    <span>&#160;</span>
+    </ng-container>
+    
+    <router-outlet></router-outlet>

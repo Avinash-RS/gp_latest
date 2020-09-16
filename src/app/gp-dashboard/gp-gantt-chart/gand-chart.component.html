@@ -1,0 +1,241 @@
+<!-- <div class="gandu-chart" [style.width]="ganduChart"> Added Sridhar -->
+<div class="gandu-chart" [style.width]="ganduChart">
+  <div class="gand-header">
+    <div *ngFor="let item of weekData; index as i">
+      <div *ngIf="item[0] == startDate['year']">
+        <!-- Added Sridhar-->
+        <div class="calendarWrapper">
+          <div class="year-shift">
+            <button [disabled]="disableLeftIcon" (click)="monthSwitchLeft(startDate['month'], startDate['year'])">
+              <i style="font-size: 16px; margin: .25em 0;" class="material-icons">
+                keyboard_arrow_left
+              </i>
+            </button>
+            <!-- For Selecting Date Picker -->
+            <mat-form-field style="display: block; width: 1px !important; " class="example-full-width">
+              <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker"
+                (dateInput)="datePickerChange($event.value)">
+              <mat-datepicker #picker (selectedChanged)="datePickerChange($event)"></mat-datepicker>
+            </mat-form-field>
+
+            <!-- To open date picker -->
+            <div style="cursor: pointer;" matTooltip="Custom Date Picker" matTooltipPosition="above" (click)="picker.open()">
+              {{ bigMonths[createMonthNumber(startDate["month"])] }} -
+              {{ item[0] }}
+            </div>
+
+            <button [disabled]="disableRightIcon" (click)="monthSwitchRight(startDate['month'], startDate['year'])">
+              <i style="font-size: 16px; margin: .25em 0;" class="material-icons">
+                keyboard_arrow_right
+              </i>
+            </button>
+          </div>
+
+          <!-- <div>
+                            <mat-form-field class="auto-width" style="pointer-events: none;">
+                                <mat-select value="0">
+                                    <mat-option value="0">
+                                        Month
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field> -->
+          <!-- {{filterValue}} -->
+          <div style="display: flex;">
+              <div class="gnatt-filter">
+                  <mat-form-field>
+                    <mat-select [(value)]="selectedGnattCode" [(ngModel)]="filterValueCode" (selectionChange)="filterSelectionChangeCode(filterValueCode)" multiple>
+                        <mat-option (click)="filterChangeCode(filterValueCode)" value="0">Select All</mat-option>
+                      <mat-option *ngFor="let food of statusCodeArr" [value]="food.status">
+                        {{ food.name }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+    
+              <div style="margin: 0 1em;" class="gnatt-filter">
+                  <mat-form-field>
+                    <mat-select [(value)]="selectedGnattUser" [(ngModel)]="filterValueUser" (selectionChange)="filterSelectionChangeUser(filterValueUser)" multiple>
+                        <mat-option (click)="filterChangeUser(filterValueUser, '0')" value="0">Select All</mat-option>
+                      <mat-option *ngFor="let user of activeUsers" [value]="user._id">
+                        {{ user.firstName + ' ' + user.lastName }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+    
+            <div class="gnatt-filter">
+              <mat-form-field>
+                <mat-select [(value)]="selectedGnatt" [(ngModel)]="filterValue" (selectionChange)="filterSelectionChange(filterValue)" multiple>
+                    <mat-option (click)="filterChange(filterValue)" value="0">Select All</mat-option>
+                  <mat-option *ngFor="let food of departmentVaraties" [value]="food.slug">
+                    {{ food.displayName }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <button *ngIf="ACL.create !== 'none'" class="addNew" (click)="addTask()"
+              style="margin: 0 0 .75em 2em; margin-right: 5px;">
+              ADD NEW
+            </button>
+          </div>
+          <!-- </div> -->
+        </div>
+        <!-- Added -->
+
+        <div class="cell" *ngFor="let itm of item[1]; index as j">
+          <div #dates *ngIf="j == startDate['month'] - 1" class="dates " [ngClass]="
+              numberToArr(daysToWeeks(item[1][j])).length == 5
+                ? 'fiveWeeks'
+                : ''
+            ">
+            <div class="items" [style.minWidth]="
+                weekWidth(
+                  weakFromTo(its, startDate['month'], startDate['year'])
+                    .dayCount
+                )
+              " [style.maxWidth]="
+                weekWidth(
+                  weakFromTo(its, startDate['month'], startDate['year'])
+                    .dayCount
+                )
+              " *ngFor="let date of numberToArr(weeksInMonthFun()); index as its">
+              <div class="normal-weeks" [ngClass]="
+                  currentWeekHighlight(
+                    weakFromTo(its, startDate['month'], startDate['year']).value
+                  )
+                ">
+                <!-- {{weeksInMonthFun()}} <br> -->
+                <!-- {{weakFromTo(its, startDate['month'], startDate['year']).dayCount}} <br> -->
+                <b>Week {{ its + 1 }}</b> <br />
+                <!-- {{months[j-1]}} -->
+                <span>
+                  {{
+                    forOneDay(
+                      weakFromTo(its, startDate["month"], startDate["year"])
+                        .value
+                    )
+                  }}
+                  <br />
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="gandu-body" [style.width]="ganduChart">
+    <div class="grid-views" [style.minWidth]="ganduChart" [style.maxWidth]="ganduChart">
+      <div *ngFor="
+          let itm of numberToArr(
+            numberOfDays(startDate['year'], startDate['month'])
+          )
+        " [className]="'grid-childs ' + curentDateHighlight(itm)" [style.minWidth]="dayWidth"></div>
+    </div>
+    <div *ngIf="showEmpty && !unDefined" class="placeholder-text">
+      <h1>NO MILESTONE AVAILABLE...</h1>
+    </div>
+    <div *ngFor="let item of inputData" malihu-scrollbar [scrollbarOptions]="scrollbarOptions"
+      class="over-flow-hidden main-content">
+      <!-- <div class="grid-views">
+            <div *ngFor="let itms of numberToArr(numberOfDays(startDate['year'], startDate['month']))"
+                [style.width]="dayWidth" class="grid-childs"></div>
+            </div> -->
+
+      <div *ngFor="let itm of item" [className]="
+          showHideClassBasedOnPosition(
+            itm['marginLeft'] || '0px',
+            itm['width'] || '0px'
+          )
+        " [style.width]="itm['width']" [style.margin-left]="itm['marginLeft']">
+        <div *ngIf="showGnattData" (click)="editTab(itm['_id'], itm['department']['slug'])"
+          [className]="'tile-container cursorPointer '">
+          <div *ngIf="(filterValue.includes(itm['department']['slug']) || filterValue[0] === '0') && (filterValueCode.includes(itm['status']) || filterValueCode[0] === '0')"
+            [className]="'snail-bar ' + itm['department']['slug']">
+            <div class="avatar" style="display: flex;">
+              <div class="avatar-parent-container" *ngFor="let assign of itm.assignedTo; let i = index">
+                <div *ngIf="i < 1" class="avatar-container-child" matTooltipClass="primary-tooltip" [matTooltip]="
+                    assign['firstName'] + ' ' + assign['lastName']
+                  ">
+                  <img *ngIf="assign['profileImageUrl']" [src]="
+                      assign['profileImageUrl'].startsWith(
+                        'https://ik.imagekit.io/growthportal'
+                      )
+                        ? BASE_IMAGE_URL +
+                          assign['profileImageUrl'].replace(
+                            'https://ik.imagekit.io/growthportal',
+                            ''
+                          ) +
+                          '?tr=w-150,h-150'
+                        : BASE_IMAGE_URL +
+                          assign['profileImageUrl'] +
+                          '?tr=w-150,h-150'
+                    " alt="" />
+                  <b *ngIf="!assign['profileImageUrl']" style="text-transform: uppercase !important;">
+                    <span>{{ assign["firstName"].slice(0, 1) }}</span>
+                    <span>{{ assign["lastName"].slice(0, 1) }}</span>
+                  </b>
+                </div>
+
+
+              </div>
+              <div *ngIf="itm.assignedTo.length > 1" class="avatar-parent-container-overlay">
+                  <div class="avatar-container-child" matTooltipClass="tooltip-list" matTooltipPosition="above" [matTooltip]="tooltipName(itm.assignedTo) | tooltipList">
+                      <b style="text-transform: uppercase !important;">
+                        <span>+{{itm.assignedTo.length - 1}}</span>
+                        <!-- <span>{{ assign["firstName"].slice(0, 1) }}</span>
+                        <span>{{ assign["lastName"].slice(0, 1) }}</span> -->
+                      </b>
+                    </div>
+        
+</div>
+            </div>
+            <div class="main">
+              <h2 style="color: #FFFFFF;">{{ itm["displayName"] }}</h2>
+              <p>
+                <span [className]="itm['status']"> {{ itm["status"] | uppercase }} </span>
+               <span style="margin-left: .5em;"> {{' ' + ' ' + itm["startDate"]["date"] }}
+                {{ months[itm["startDate"]["month"]] }}
+                {{ itm["startDate"]["year"] }} - {{ itm["endDate"]["date"] }}
+                {{ months[itm["endDate"]["month"]] }}
+                {{ itm["endDate"]["year"] }}
+                </span>
+              </p>
+            </div>
+            <!--  [ngClass]="itm['dependency'].length > 0 && itm['department']['slug'] === 'engineering' ? 'double' : (itm['dependency'].length > 0 || itm['department']['slug'] === 'engineering') ? 'single' : ''" -->
+            <div [className]="'placeholder-right ' + itm['department']['slug']"></div>
+            <span style="cursor: pointer !important;" *ngIf="itm['department']['slug'] === 'engineering'"
+              (click)="editTabs(itm['_id'], itm['department']['slug'])">
+              <i style="font-size: 17px !important; color: #FFFFFF;" [ngStyle]="{'margin-right': itm['dependency'].length === 0 ? '2em' : '3em'}"
+                class="icon-dashboard1 icomoon"></i>
+            </span>
+            <span style="cursor: pointer !important;"  *ngIf="itm['dependency'].length > 0" (click)="viewDependency(itm['_id'], itm['department']['slug'])">
+              <i style="font-size: 17px !important; color: #FFFFFF; margin-right: 1.5em !important;" class="icon-link icomoon"></i>
+            </span>
+            <span style="cursor: pointer !important;" (click)="commentTab(itm['_id'])">
+                <i style="font-size: 17px !important; color: #FFFFFF;" class="icon-comment icomoon"></i>
+              </span>
+  
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="snail-bar frs"></div>
+                <div class="snail-bar designe"></div>
+                <div class="snail-bar sprint"></div>
+                <div class="snail-bar marketing"></div>
+                <div class="snail-bar hiring"></div>
+                <div class="snail-bar investing"></div> -->
+  </div>
+  <!-- {{legend}} Added Sridhar -->
+  <div class="gandu-foot">
+    <div class="container">
+      <!--  (click)="lengthCalc(item[0]['startDate']['date'])" -->
+      <div class="item" *ngFor="let item of legend">
+        <span class="foot-thing" [style.background]="item.background"></span>
+        <div>{{ item.department }}</div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,188 @@
+.sidebar-wrapper {
+  position: sticky;
+  top: 16px;
+  height: calc(100vh - 32px);
+  width: 70px;
+  background: white;
+  box-shadow: 0 0 5px 0 grey;
+  border-radius: 0 50px 50px 0;
+  .sidebar-nav {
+    list-style-type: none;
+    position: absolute;
+    top: 5%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0px;
+    width: 100%;
+    i,
+    .img {
+      display: inline-block;
+      .active {
+        fill: cyan;
+        color: #4DBEB7;
+      }
+    }
+    .wekan-logo {
+      margin: 0 0 3rem 0;
+    }
+    li {
+      margin: 0 0 3rem 0;
+    }
+  }
+}
+
+.box {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 6px;
+  opacity: 1;
+  padding: 7px;
+  padding-top: 15px;
+  color: #585858;
+}
+.active {
+  box-shadow: 0px 0px 6px #55a29b33;
+  color: #4DBEB7;
+}
+.black {
+  color: #000;
+}
+
+
+// .dasboardWrapper.toggled .icon-expand {
+// 	left: 220px;
+// }
+// //Header and Aside Menu Style
+// .dasboardWrapper {
+// 	padding-left: 0;
+// 	transition: all .1s ease;
+// 	position: relative;
+// }
+// .toggled .sidebar-nav span {
+// 	visibility: visible
+// }
+// .sidebar-nav span {
+// 	visibility: hidden
+// }
+// #sidebar-wrapper {
+// 	z-index: 1;
+//     position: fixed;
+//     top: 0px;
+// 	left: 250px;
+// 	width: 0;
+// 	height: 100%;
+// 	margin-left: -250px;
+// 	overflow-y: auto;
+// 	overflow-x: hidden;
+// 	transition: all .1s ease;
+// 	box-shadow: 4px 2px 6px 0 rgba(0, 0, 0, 0.05);
+// 	background-color: #fff;
+// }
+// .dasboardWrapper.toggled #sidebar-wrapper {
+// 	width: 250px;
+// }
+// .sidebar-brand {
+// 	position: absolute;
+// 	top: 16px;
+// 	left: 10px;
+// }
+// .sidebar-nav {
+// 	position: absolute;
+// 	top: 75px;
+// 	width: 250px;
+// 	margin: 0;
+// 	padding: 0;
+// 	list-style: none;
+// }
+// .sidebar-nav>li {
+// 	text-indent: 10px;
+// 	line-height: 42px;
+// }
+// .sidebar-nav>li a {
+// 	display: block;
+// 	text-decoration: none;
+// 	color: #f9f9f9;
+// 	text-transform: capitalize;
+// }
+// .sidebar-nav .active a,
+// .sidebar-nav>li:hover a {
+// 	color: blue;
+// }
+// .sidebar-nav .icomoon {
+// 	padding-left: 8px;
+// 	padding-right: 12px;
+// 	font-size: 20px;
+// }
+// #navbar-wrapper {
+// 	width: 100%;
+// 	position: absolute;
+// 	z-index: 2;
+// }
+// .dasboardWrapper.toggled #navbar-wrapper {
+// 	position: absolute;
+// 	margin-right: -250px;
+// }
+// #navbar-wrapper .navbar {
+// 	border-width: 0 0 0 0;
+// 	font-size: 24px;
+// 	margin-bottom: 0;
+// 	border-radius: 0;
+// }
+// #content-wrapper {
+// 	width: 100%;
+// 	position: absolute;
+// 	padding: 15px;
+// 	top: 100px;
+// }
+// .dasboardWrapper.toggled #content-wrapper {
+// 	position: absolute;
+// 	margin-right: -250px;
+// }
+// .dasboardWrapper,
+// .dasboardWrapper.toggled {
+// 	padding-left: 66px;
+// }
+// #sidebar-wrapper {
+// 	width: 66px;
+// }
+// .dasboardWrapper.toggled #sidebar-wrapper {
+// 	width: 240px;
+// }
+// .dasboardWrapper.toggled #navbar-wrapper,
+// .dasboardWrapper.toggled #content-wrapper {
+// 	position: absolute;
+// 	margin-right: -190px;
+// 	position: relative;
+// 	margin-right: 60px;
+// }
+// #navbar-wrapper {
+// 	position: relative;
+// }
+// .dasboardWrapper.toggled {
+// 	padding-left: 240px;
+// }
+// #content-wrapper {
+// 	position: relative;
+// 	top: 0;
+// }
+
+// //user update info start
+// .noLine.mat-form-field-appearance-legacy .mat-form-field-underline {
+//     background-color: transparent;
+// }
+//  .profileName .mat-form-field-infix {
+//     border-top: 0;
+// }
+// .profileName .mat-form-field-wrapper {padding-bottom:0;margin-bottom:0;}
+// .mat-form-field.phoneNo{
+//     width: 50%;
+// }
+// .readField .mat-form-field.phoneNo,.readField .mat-form-field.LocalTime{
+// 	width: 46%!important;
+// 	float:left;
+// }
+// .readField .mat-form-field.LocalTime{float:right}
+// //user update info start
+a {
+  text-decoration-color: none;
+}

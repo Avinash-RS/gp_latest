@@ -1,0 +1,21 @@
+.error-wrapper {
+text-align: center;
+white-space: nowrap;
+font-weight: 200;
+border-radius: 4px;
+.button-wrapper {
+    margin-top: 3em;
+    align-items: center;
+    .confirm-btn {
+        background: rgba(139, 0, 0, 0.714);
+        color: #fff;
+        font-weight: 200;
+    }
+    .cancel-btn {
+        margin-left: 2em;
+        background: rgba(139, 0, 0, 0.714);
+        color: #fff;
+        font-weight: 200;
+    }
+}
+}

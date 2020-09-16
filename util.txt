@@ -1,0 +1,10 @@
+Need For Help Table {
+    name: String,
+    mobile: Number,
+    message: String,
+    location: {
+        lat: Number,
+        lng: Number,
+        Formatted_Address: String
+    }
+}

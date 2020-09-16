@@ -1,0 +1,33 @@
+<h1 *ngIf="modalData[0].title" mat-dialog-title>{{ modalData[0].title }}</h1>
+<mat-dialog-content
+  class="mat-typography"
+  [ngStyle]="{ 'text-align': modalData[0].showCancel === true ? '' : 'center' }"
+>
+  <h3 *ngIf="modalData[0].contentTitle">{{ modalData[0].contentTitle }}</h3>
+  <mat-icon
+    *ngIf="modalData[0].iconName"
+    color="{{modalData[0].iconName == 'error' ? 'warn' : 'primary'}}"
+    class="material-icons dialog-icon"
+    >{{modalData[0].iconName}}</mat-icon
+  >
+  <!-- <mat-icon color="warn" class="material-icons dialog-icon">error</mat-icon> -->
+  <div class="forgetPopupText" [innerHtml]="modalData[0].content"></div>
+</mat-dialog-content>
+<mat-dialog-actions
+  [ngStyle]="{
+    'justify-content': modalData[0].showCancel === true ? 'flex-end' : 'center'
+  }"
+>
+  <button class="forgetPasswordErrorButton" *ngIf="modalData[0].showCancel" mat-button mat-dialog-close>
+    Cancel
+  </button>
+  <button
+    class="forgetPasswordSuccessButton"
+    mat-raised-button
+    color="primary"
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+  >
+   <span class="buttonTextColor"> {{ modalData[0].buttonText | uppercase}}</span>
+  </button>
+</mat-dialog-actions>

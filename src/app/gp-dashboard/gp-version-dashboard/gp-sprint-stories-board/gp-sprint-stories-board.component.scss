@@ -1,0 +1,54 @@
+.sprint-story-store {
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+    .with-tab {
+//        box-shadow: 0 0 3px 0 grey;
+        flex: 1;
+        border: 1px solid rgba(204, 204, 204, 0.346);
+        border-radius: 13px;
+        padding-bottom: 0px;
+        margin: 36px 0px 0 0px;
+        max-height: 340px;
+        min-height: 340px;
+        background: #fff;
+        }
+    .spaceTab {
+        margin-right: 61px;
+    }
+    .story-header {
+        font-weight: 200;
+        color: #000;
+        font-size: 14px;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        padding: 22px 0;
+        border-bottom: 2px solid rgba(204, 204, 204, 0.346);
+    }
+}
+.mat-tab-labels {
+    background: #000 !important;
+}
+
+.table-title {
+    display: flex;
+    div {
+        flex: 1;
+        font-weight: 200;
+        color: #000;
+        text-align: center;
+        padding: 22px;
+        border-bottom: 2px solid rgba(204, 204, 204, 0.346);
+        box-sizing: border-box;
+        cursor: pointer;
+        // background: rgba(35, 163, 154, 0.253);
+    }
+    .tab-active {
+        font-weight: 200;
+        color: #23A39B;
+        background: rgba(35, 163, 154, 0.163);
+        border-radius: 10px 10px 0 0;
+    }
+}
+

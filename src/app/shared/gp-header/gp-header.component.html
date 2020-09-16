@@ -1,0 +1,46 @@
+<header>
+  <div class="left"></div>
+  <div class="right">
+    <div class="head-1 auto-width">
+      <mat-form-field class="noLine">
+        <mat-select [(value)]="selectedProduct" [matTooltipPosition]="position" matTooltipClass="primary-tooltip" [matTooltip]="selectedProductTip" placeholder="" (selectionChange)="onProductChange(selectedProduct)">
+          <mat-option *ngFor="let partnersName of productList1" value="{{partnersName.product._id}}">
+            {{partnersName.product.displayName}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="avatar">
+        <div class="avatar-parent-container">
+            <div class="avatar-container-child">
+
+                <img *ngIf="url"
+                    src="{{BASE_IMAGE_URL}}{{url ? url : ''}}?tr=w-150,h-150" alt="">
+                <b *ngIf="!url && fName"
+                    style="text-transform: uppercase !important;">
+                    <span>{{fName.slice(0,1)}}</span>
+                    <span>{{lName.slice(0,1)}}</span>
+                </b>
+            </div>
+        </div>
+    </div>
+
+    <div class="head-2">
+      <button class="userName" mat-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        {{userName}}
+        <mat-icon class="usserArrow">arrow_drop_down</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button (click)="$event.preventDefault(); profile()" mat-menu-item>
+          <mat-icon>person</mat-icon>
+          <span>Profile</span>
+        </button>
+        <button (click)="logOut()" mat-menu-item>
+          <mat-icon>power_settings_new</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </div>
+
+  </div>
+</header>

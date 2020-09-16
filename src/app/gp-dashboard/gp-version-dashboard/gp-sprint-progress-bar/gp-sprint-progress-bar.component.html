@@ -1,0 +1,33 @@
+<div class="date-jump">
+    <div class="content">
+        <div (click)="disableLeftIcon!==true ? switchLeft(sprintListId) : ''" [ngClass]="disableLeftIcon===true ? 'deActive' : 'icon'">
+            <i class="material-icons">
+              keyboard_arrow_left
+            </i>
+          </div>
+          <div class="column">
+            <h3>{{sprintList}}</h3>
+            <div *ngIf="showFutureSprint === false" class="carousel-text">{{sprintStartDate}} to {{sprintEndDate}}</div>
+            <div *ngIf="showFutureSprint === true" class="carousel-text">Future Sprint</div>
+          </div>
+          <div (click)="disableRightIcon!==true ? switchRight(sprintListId) : ''" [ngClass]="disableRightIcon===true ? 'deActive' : 'icon'">
+            <i class="material-icons">
+              keyboard_arrow_right
+            </i>
+          </div>
+    </div>
+  </div>
+
+<div class="progress-shirt">
+  <div class="progress-bar">
+    <span [style.width]="progressValue + '%'"></span>
+  </div>
+  <div class="right-part">
+      <p class="progress-value">{{totalDone}}/{{totalIssues}}</p>
+      <p class="comp">Task Completed</p>
+  </div>
+</div>
+<div class="hang-chip">
+    <span><i style="width: 12.5px;" class="icon-time icomoon"></i> &#160;{{loggedHrs}} / {{totalHrs}} Hrs Completed</span>
+    
+</div>

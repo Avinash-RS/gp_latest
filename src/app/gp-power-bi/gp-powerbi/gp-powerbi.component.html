@@ -1,0 +1,5 @@
+<!-- <iframe class="iframe" src="https://app.powerbi.com/view?r=eyJrIjoiY2UzNjgyZmEtZWFmZS00NWFhLThiYjMtNjQ1YWQ4MzI3MTFkIiwidCI6Ijc0ZTZhNjEyLWJlZGEtNDc1ZC1hMWRmLTA4Y2NhNTdiYmVmOSJ9" frameborder="0" allowFullScreen="true"></iframe> -->
+<iframe *ngIf="powerBIURL" class="iframe" [src]="powerBI" frameborder="0" allowFullScreen="true"></iframe>
+<mat-card *ngIf="!powerBIURL" class="iframe1">
+    <div class="not-found">No Data Available</div>
+</mat-card>

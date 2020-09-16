@@ -1,0 +1,85 @@
+header {
+  display: flex;
+  width: 100%;
+  position: relative;
+  height: 50px;
+  align-items: center;
+  // position: sticky;
+  top: 0;
+  right: 0;
+  // z-index: 3;
+  background: #f9f9f9;
+  .left {
+    flex: 1;
+  }
+  .right {
+    display: flex;
+    img {
+      height: 40px;
+    }
+    .avatar {
+      float: right;
+      .avatar-parent-container {
+        color: rgb(255, 255, 255);
+        .avatar-container-child {
+          position: relative;
+          // background: rgba(0, 0, 0, 0.2);
+          background: #23a39b;
+          left: 0px;
+          top: 0px;
+          max-height: 40px;
+          max-width: 40px;
+          min-height: 40px;
+          min-width: 40px;
+          border-radius: 50%;
+          text-align: center;
+          display: inline-block;
+          img {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+            top: 0px;
+            left: 0px;
+            border-radius: 50%;
+            z-index: 1;
+          }
+          b {
+            font-weight: 800;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+          }
+        }
+      }
+
+    }
+
+  }
+  .userName {
+    font-weight: 300;
+  }
+  ::ng-deep .mat-form-field-underline {
+    display: none;
+  }
+  mat-form-field {
+    width: 140px;
+    font-weight: 300;
+    margin: 0em 2rem 0em 0;
+    .mat-select-placeholder {
+      color: #000 !important;
+    }
+  }
+  button {
+    margin: 0.5em;
+  }
+  mat-icon {
+    padding-bottom: 2rem;
+  }
+  mat-select {
+    .mat-select-arrow {
+      color: #000 !important;
+    }
+  }
+}
